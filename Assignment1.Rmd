@@ -1,0 +1,77 @@
+## Add column on original data that transforms the 1 and 4 to actual choices between left and right screen; having trouble with this code; find new one [original$choice <- apply(original,1,)]
+original <- read.csv("data.csv")
+original2 <- cbind(original, apply(original$Image_right,1, function(x) (ifelse(any(original$Choice_1left_4right==1),original$Image_left,length(unique(x)))))   
+
+## Create new data frame (DF) with all three combinations
+combinations <- combn(1:20, 3, FUN=NULL, simplify = TRUE)
+DF <- cbind(combinations)
+DF <- t(DF)
+
+## Find if function to =1 for Column 4 if Column 1 > Column 2, =1 for Column 5 if Column 2 > 3, and =1 if Column 1 > Column 3; FOR EACH SUBJECT
+
+## Create a new data frame (DF2 and DF3) with all three combinations again but with different requirements so that Col1 > Col3 > Col2; Col3 > Col1 > Col2
+DF2 <- cbind(combinations)
+DF2 <- t(DF2)
+
+## Eliminate rows with Column 4 - 6 all equal to 0 or 1 for DF 1, DF2, and DF3 one by one
+
+## Count columns by each subject; number = number of violations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Junk Code that I am not using or experimenting with still
+
+dataframe1 <- matrix(0,1140, 6) ## Empty table to fill with data from data.csv
+col1 <- rep(c(1:20), each=60)
+col2 <- rep(c(2:20,1), times=60)
+col3 <- rep(c(3:20, 1, 2), times=60)
+dataframe1 <- cbind(col1, col2, col3)
+subset(dataframe1, col1!=col2 & col2!=col3 & col1!=col3)
+dataframe1[col4] <- paste[dataframe1[col1], dataframe1[col2] dataframe1[col3] sep=" "]
+
+DF = data.frame(col1=rep(1:20, each=60), col2=rep(c(1:20), times=60), col3=rep(c(2:20,1), times=60))
+DF2 <- subset(DF, col1!=col2 & col2!=col3 & col1!=col3)
+DF2$col4 <- paste(DF2$col1, DF2$col2, DF2$col3, sep=" ")
+DF2.sort=t(apply(DF2.1,sort))
+DF2[!duplicated(DF2.sort),]
+
+DF = data.frame(col1=rep(1:20, each=60), col2=rep(c(1:20), times=60), col3=rep(c(2:20,1),df times=60))
+DF.sort=t(apply(DF.1,sort))
+DF2 <- DF[!duplicated(DF.sort),]
+
+DF = data.frame(col1=rep(1:20, each=8000), col2=rep(rep(c(1:20), each=400),times=20), col3=rep(rep(c(1:20), each=20),times=400))
+DF.sort=t(apply(DF.1,sort))
+DF2 <- DF[!duplicated(DF.sort),]
+
+col1 <- rep(c(1:20), each=60)
+col2 <- rep(c(1:20), times=60)
+col3 <- rep(c(2:20,1), times=60)
+dataframe1 <- cbind(col1, col2, col3)
+subset(dataframe1, col1!=col2 & col2!=col3 & col1!=col3)
+dataframe1[col4] <- paste[dataframe1[col1], dataframe1[col2] dataframe1[col3] sep=" "]
+
+DF <- expand.grid(c(1:20), c(1:20), c(1:20))
+subset(dataframe1, col1!=col2 & col2!=col3 & col1!=col3)
+
+DF <- expand.grid(col1=c(1:20), col2=c(1:20), col3=c(1:20))
+DF2 <- subset(DF, col1!=col2 & col2!=col3 & col1!=col3)
+
+N   <- 3
+vec <- c(1:20)
+lst <- lapply(numeric(N), function(x) vec)
+as.matrix(expand.grid(lst))
+
+combinations <- combn(1:20, 3, FUN=NULL, simplify = TRUE)
+DF <- cbind(combinations)
+DF <- t(DF)
