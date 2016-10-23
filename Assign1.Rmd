@@ -1,0 +1,67 @@
+---
+title: "Assignment1"
+author: "Kristy Kim"
+date: "10/17/2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Practice Assignment
+<http://rmarkdown.rstudio.com>.
+
+Testing...
+
+I begin by adding a column on original data set that translates the column "Choice_1left_4right" into the actual values presented on the left and right screen. I name the data set "original" and the new column "choice":
+
+```{r}
+rm(list=ls())
+original <- read.csv("data.csv")
+original$choice <- original$Image_right
+index <- original$Choice_1left_4right==1
+original$choice[index] <- (original$Image_left[index])
+
+original <- transform(original,min=pmin(Image_right, Image_left))
+original <- transform(original,max=pmax(Image_right, Image_left))
+original$choiceset <- paste(original$min,original$max, sep = ",")
+```
+
+I then create a new data frame (DF) with all three possible combinations of 1-20, yielding a data frame with 1140 rows.
+
+```{r}
+combinations <- combn(1:20, 3, FUN=NULL, simplify = TRUE)
+DF <- cbind(combinations)
+DF <- t(DF)
+DF <- data.frame(DF)
+colnames(DF) <- c("A", "B", "C")
+```
+
+Counting... should also find how to get rid of NA data
+
+```{r, eval=FALSE}
+if(original$min==DF$A & original$max==DF$B & original$min==original$choice) {print(1)} else {print(0)}
+aggregate(choice ~ Image_right, data=original, FUN=sum)
+library(plyr)
+a <- ddply(original,.(Image_right),summarise, count=length(choice[SubjectID==119]))
+```
+
+Pseudo - code
+
+``` {r, eval=FALSE}
+col 4 <- if original$min==DF$V1 and original$max==DF$V2 and DF$V1==original$choice and SubjectID==119, place 1 else 0
+col 5 <- if original$min==DF$V2 and original$max==DF$V3 and DF$V2==original$choice and SubjectID==119, place 1 else 0
+col 6 <- if original$min==DF$V1 and original$max==DF$V3 and DF$V1==original$choice and SubjectID==119, place 1
+
+col 4 <- if(original$min==DF$A & original$max==DF$B & original$min==original$choice) {print(1)} else {print(0)}
+
+do for all subjects and all permutations
+
+if col 4 - col6 all = 1 or 0, delete row
+if col 7 - col9 all = 1 or 0, delete row
+if col 10 - col12 all = 1 or 0, delete row
+
+number<- count based on rows
+violations <- cbind(subjectID, number)
+```
